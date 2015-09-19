@@ -4,7 +4,7 @@ int mySqrt(int x)
     
 	if(x < 2)
 	    return x;
-    while(result * result > x)  // Newton's method
+    while(result * result > x)
         result = (result + x / result) >> 1;
     
     return result;
