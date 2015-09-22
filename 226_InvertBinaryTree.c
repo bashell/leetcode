@@ -11,12 +11,12 @@ struct TreeNode* invertTree(struct TreeNode* root) {
     if(root == NULL)
         return NULL;
         
-    // ½»»»×óÓÒ×ÓÊ÷
+    // äº¤æ¢å·¦å³å­æ ‘
     temp = root -> left;
     root -> left = root -> right;
     root -> right = temp;
     
-    // µÝ¹é
+    // é€’å½’
     invertTree(root -> left);
     invertTree(root -> right);
     
