@@ -9,7 +9,7 @@
  /* iterative version */
 struct ListNode* reverseList(struct ListNode* head) {
     struct ListNode *pre = NULL, *cur = NULL;
-    if(head == NULL || head -> next == NULL)    // 0 or 1 node
+    if(head == NULL || head -> next == NULL)
         return head;
     
     // reverse iteratively
@@ -20,14 +20,14 @@ struct ListNode* reverseList(struct ListNode* head) {
         cur -> next = pre;
         pre = cur;
     }
-    head -> next = cur;
+    head -> next = cur;    // reverse completed !
     
     return head;
 }
 
 /* recursive version */
 struct ListNode* reverseList(struct ListNode* head){
-    if(head == NULL || head -> next == NULL)    // 0 or 1 node
+    if(head == NULL || head -> next == NULL)    // base case
         return head;
         
     // reverse recursively
