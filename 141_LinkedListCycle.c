@@ -8,7 +8,7 @@
 bool hasCycle(struct ListNode *head) {
     if(head == NULL || head -> next == NULL)
         return false;
-        
+    // 快慢指针判断法
     struct ListNode *fast, *slow;
     fast = head -> next;
     slow = head;
