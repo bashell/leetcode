@@ -7,7 +7,7 @@
  */
  
  
- // recursive version
+/* recursive version */
 struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2) {
     if(l1 == NULL)
         return l2;
@@ -27,7 +27,7 @@ struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2) {
 }
 
 
-// iterative version
+/* iterative version */
 struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2) {
     if(l1 == NULL)
         return l2;
@@ -61,7 +61,7 @@ struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2) {
         }
         head_ptr = head_ptr -> next;
     }
-    head_ptr -> next = (l1 ? l1 : l2);    // 最后l1和l2谁不空就连接谁
+    head_ptr -> next = (l1 ? l1 : l2);    // l1和l2谁非空就将谁连到最后
     
     return head;
 }
