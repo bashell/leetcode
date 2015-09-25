@@ -9,8 +9,8 @@
 class Solution {
 public:
     // 链表反转函数(iterative): O(n)
-    struct ListNode* reverseList(struct ListNode* head) {
-        struct ListNode *pre = NULL, *cur = NULL;
+    ListNode* reverseList(ListNode* head) {
+        ListNode *pre = NULL, *cur = NULL;
         if(head == NULL || head -> next == NULL)
             return head;
         while(head -> next != NULL)
