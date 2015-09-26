@@ -7,10 +7,10 @@
  * };
  */
 struct TreeNode* invertTree(struct TreeNode* root) {
-    struct TreeNode *temp;
     if(root == NULL)
-        return NULL;
-        
+        return NULL;    
+    struct TreeNode *temp;
+
     // 交换左右子树
     temp = root -> left;
     root -> left = root -> right;
