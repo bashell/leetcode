@@ -8,6 +8,5 @@ int hammingWeight(uint32_t n) {
         if(n & temp)
             result++;
     }
-        
     return result; 
 }
