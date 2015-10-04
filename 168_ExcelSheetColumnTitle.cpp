@@ -4,15 +4,12 @@ using namespace std;
 
 class Solution{
 public:
-    string convertTotile(int n){
+    string convertTotile(int n) {
         string str;
-
-        for( ; n > 0; n /= 26)
-        {
+        for( ; n > 0; n /= 26) {
             n -= 1;
             str = (char)('A' + n % 26) + str;    // 由于字符是从右向左得到的
         }
-
         return str;
     }
 };
