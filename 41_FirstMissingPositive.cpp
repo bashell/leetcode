@@ -3,6 +3,7 @@ public:
     int firstMissingPositive(vector<int>& nums) {
         if(nums.size() == 0)
             return 1;
+
         set<int> iset;
         for(vector<int>::iterator vec_it = nums.begin(); vec_it != nums.end(); ++vec_it)
             if(*vec_it > 0)
@@ -19,6 +20,6 @@ public:
         for(set<int>::iterator set_it = iset.begin(); set_it != iset.end(); ++set_it, ++temp)
             if(temp != *set_it)
                 return temp;
-        return temp;    // set中元素连续
+        return temp;    // 若set中元素连续
     }
 };
