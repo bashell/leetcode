@@ -4,9 +4,9 @@ using namespace std;
 
 class Solution{
 public:
-    int titleToNumber(string s){
+    int titleToNumber(string s) {
         int num = 0;
-        for(string::size_type ix = 0; ix < s.size(); ++ix){
+        for(string::size_type ix = 0; ix < s.size(); ++ix) {
             num *= 26;    // 26进制:每左移一位,都乘以26
             num += s[ix] - 'A' + 1;
         }
