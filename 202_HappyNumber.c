@@ -4,13 +4,11 @@ bool isHappy(int n)
     
     if(n <= 0)
         return false;
-    while(1)
-    {
+    while(1) {
         int temp_mod;
         temp_n = n;
         temp_sum = 0;
-        while(temp_n > 0)
-        {
+        while(temp_n > 0) {
             temp_mod = temp_n % 10;
             temp_sum += temp_mod * temp_mod;
             temp_n /= 10;
