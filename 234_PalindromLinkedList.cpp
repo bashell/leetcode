@@ -10,11 +10,10 @@ class Solution {
 public:
     // 链表反转函数(iterative): O(n)
     ListNode* reverseList(ListNode* head) {
-        ListNode *pre = NULL, *cur = NULL;
-        if(head == NULL || head -> next == NULL)
+        if(head == nullptr || head -> next == nullptr)  // 0 or 1 node
             return head;
-        while(head -> next != NULL)
-        {
+        ListNode *pre = nullptr, *cur = nullptr;
+        while(head -> next != nullptr) {  // reverse iteratively
             cur = head;
             head = head -> next;
             cur -> next = pre;
@@ -25,31 +24,24 @@ public:
     }
     
     bool isPalindrome(ListNode* head) {
-        if(head == NULL || head -> next == NULL)
+        if(head == nullptr || head -> next == nullptr)
             return true;
-            
-        ListNode *left = head, *mid = head, *right = head, *pre = NULL;
+        ListNode *left = head, *mid = head, *right = head, *pre = nullptr;
         int len = 0;
-        
-        // 计算链表长度: O(n)
-        while(right != NULL) {
+        while(right != nullptr) {  // 计算链表长度: O(n)
             ++len;
             right = right -> next;
         }
-        
-        // 找到中间结点: O(n)  维持pre -> next == mid
-        for(int i = 0; i != len / 2; ++i) {
+        for(int i = 0; i != len / 2; ++i) {  // 找到中间结点: O(n)  维持pre -> next == mid
             pre = mid;
             mid = mid -> next;
         }
-        
         // 链表反转 + 逐个元素比较: O(n) + O(n) = O(n)
-        if(len % 2) {   
-            // 当链表中有奇数个结点时
+        if(len % 2) {  // 当链表中有奇数个结点时
             ListNode *tmp = mid;
             mid -> next = reverseList(mid -> next);    // 反转后半部分
             mid = mid -> next;    // 现在mid指向反转后的第一个结点
-            while(mid != NULL) {
+            while(mid != nullptr) {
                 if(left -> val != mid -> val) {
                     tmp -> next = reverseList(tmp -> next);    // 恢复链表原有顺序
                     return false;
@@ -63,7 +55,7 @@ public:
             // 当链表中有偶数个结点时
             pre -> next = reverseList(pre -> next);    // 反转后半部分
             mid = pre -> next;    // 现在mid指向反转后的第一个结点
-            while(mid != NULL) {
+            while(mid != nullptr) {
                 if(left -> val != mid -> val) {
                     pre -> next = reverseList(pre -> next);    // 恢复链表原有顺序
                     return false;

@@ -9,29 +9,32 @@
 struct ListNode* insertionSortList(struct ListNode* head) {
     if(head == NULL || head -> next == NULL)
         return head;
-    struct ListNode *pre = NULL, *cur = head -> next, *solved_tail = head, *ptr_tail = NULL, *ptr_tail_aft = NULL;
+    struct ListNode *pre = head, *cur = head -> next;
+    struct ListNode *dummy = (struct ListNode *)malloc(sizeof(struct ListNode));
+    if(dummy == NULL) {
+        perror("malloc");
+        exit(EXIT_FAILURE);
+    }
+    dummy -> val = 0;
+    dummy -> next = head;
     while(cur) {
-        if(cur -> val < solved_tail -> val) {   // 需要进行插入
+        if(cur -> val < pre -> val) {  // 需要插入
+            struct ListNode *ppre = dummy;
+            // while结束后ppre指向最后一个比cur值小的那个结点
+            // ppre -> next 一定不为NULL, 因为最差的情况是 ppre -> next 指向 pre
+            while(ppre -> next -> val < cur -> val)  
+                ppre = ppre -> next;
+            // 插入操作
+            pre -> next = cur -> next;
+            cur -> next = ppre -> next;
+            ppre -> next = cur;
+            cur = pre -> next;
+        } else {  // 不需要插入
             pre = cur;
-            cur = cur -> next;
-            if(pre -> val <= head -> val) {    // 需要插入在head之前
-                solved_tail -> next = cur;
-                pre -> next = head;
-                head = pre;
-            } else {    // 插在head之后的某个位置
-                // 从头结点开始向后找到最后一个比待插入结点值小的那个结点q
-                for(ptr_tail_aft = head; ptr_tail_aft -> val < pre -> val; ptr_tail_aft = ptr_tail_aft -> next) 
-                    ptr_tail = ptr_tail_aft;
-                // 遍历之后ptr_tail_aft会指向q后面那个结点，ptr_tail会指向q
-                
-                pre -> next = ptr_tail -> next;
-                ptr_tail -> next = pre;
-                solved_tail -> next = cur;
-            }
-        } else {
-            solved_tail = cur;
             cur = cur -> next;
         }
     }
+    head = dummy -> next;
+    free(dummy);
     return head;
 }

@@ -9,7 +9,7 @@ struct ListNode* removeElements(struct ListNode* head, int val) {
     if(head == NULL || head -> next == NULL && head -> val == val)
         return NULL;
     struct ListNode *pre = NULL;
-    struct ListNode *newHead = (struct ListNode *)malloc(sizeof(struct ListNode *));
+    struct ListNode *newHead = (struct ListNode *)malloc(sizeof(struct ListNode));
     if(newHead == NULL) {
         perror("malloc");
         exit(EXIT_FAILURE);
@@ -19,11 +19,11 @@ struct ListNode* removeElements(struct ListNode* head, int val) {
 
     head = newHead;
     pre = newHead;
-    while(head != NULL) {
+    while(head) {
         if(head -> val == val) {
             head = head -> next;
             pre -> next = head;
-        }else{
+        } else {
             pre = head;
             head = head -> next;
         }
