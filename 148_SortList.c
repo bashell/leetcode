@@ -6,21 +6,15 @@
  * };
  */
 struct ListNode* merge(struct ListNode* left, struct ListNode* right) {
-    if(left == NULL)
-        return right;
-    if(right == NULL)
-        return left;
-    struct ListNode *pre = NULL;
+    if(left == NULL) return right;
+    if(right == NULL) return left;
     if(left -> val <= right -> val) {
         left -> next = merge(left -> next, right);
+        return left;
     } else {
-        pre = right;
-        right = right -> next;
-        pre -> next = left;
-        left = pre;
-        left -> next = merge(left -> next, right);
+        right -> next = merge(left, right -> next);
+        return right;
     }
-    return left;
 }
 
 // mergeSort 

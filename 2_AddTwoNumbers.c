@@ -5,6 +5,10 @@
  *     struct ListNode *next;
  * };
  */
+
+/*
+ ** 不生成额外的链表, 直接在原链表上进行操作
+ */
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
     if(l1 == NULL) return l2;
     if(l2 == NULL) return l1;
@@ -42,6 +46,10 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
     if(carry == 1) {  // 较短的链表处理结束后(或者两个链表都处理完毕)，仍有进位需要继续处理
         if(l1 == NULL && l2 == NULL) {    // 两个链表都处理完毕
             struct ListNode *ptr = (struct ListNode *)malloc(sizeof(struct ListNode));
+            if(ptr == NULL) {
+                perror("malloc");
+                exit(EXIT_FAILURE);
+            }
             ptr -> val = 1;
             ptr -> next = NULL;
             ptr_pre -> next = ptr;
@@ -61,11 +69,15 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
             }
             if(carry == 1) {    // 说明l2的长度不够
                 struct ListNode *ptr = (struct ListNode *)malloc(sizeof(struct ListNode));
+                if(ptr == NULL) {
+                    perror("malloc");
+                    exit(EXIT_FAILURE);
+                }
                 ptr -> val = 1;
                 ptr -> next = NULL;
                 ptr_pre2 -> next = ptr;
             }
-        } else if(l1 != NULL && l2 == NULL) {    // l2处理完毕，l1
+        } else if(l1 != NULL && l2 == NULL) {    // l2处理完毕，l1未处理完毕
             while(l1) {
                 int cal = l1 -> val + carry;
                 l1 = l1 -> next;
@@ -81,6 +93,10 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
             }
             if(carry == 1) {    // 说明l1的长度不够
                 struct ListNode *ptr = (struct ListNode *)malloc(sizeof(struct ListNode));
+                if(ptr == NULL) {
+                    perror("malloc");
+                    exit(EXIT_FAILURE);
+                }
                 ptr -> val = 1;
                 ptr -> next = NULL;
                 ptr_pre1 -> next = ptr;
