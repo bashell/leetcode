@@ -5,7 +5,6 @@
  *     struct ListNode *next;
  * };
  */
-
 struct ListNode* reverseBetween(struct ListNode* head, int m, int n) {
     if(head == NULL || head -> next == NULL || m == n)
         return head;
@@ -14,11 +13,9 @@ struct ListNode* reverseBetween(struct ListNode* head, int m, int n) {
     struct ListNode *pre = NULL, *cur = NULL;    // 用于链表反转
     int cur_pos = 1;    // 当前指针的位置
     
-    if(m == 1)
-    {
+    if(m == 1) {
         // 将位置m到位置n的部分反转
-        while(cur_pos < n)
-        {
+        while(cur_pos < n) {
             cur = head_tmp;
             head_tmp = head_tmp -> next;
             cur -> next = pre;
@@ -28,11 +25,9 @@ struct ListNode* reverseBetween(struct ListNode* head, int m, int n) {
         head -> next = head_tmp -> next;    // head指向反转后的部分链表的尾结点
         head_tmp -> next = cur;    // 完成反转
         return head_tmp;
-        
-    }else{
+    } else {
         // 遍历到位置m - 1处
-        while(cur_pos < m - 1)
-        {
+        while(cur_pos < m - 1) {
             head_tmp = head_tmp -> next;
             ++cur_pos;
         }
@@ -42,8 +37,7 @@ struct ListNode* reverseBetween(struct ListNode* head, int m, int n) {
         ptr_m = head_tmp;    // ptr_m 指向 position m
         
         // 将位置m到位置n的部分反转
-        while(cur_pos < n)
-        {
+        while(cur_pos < n) {
             cur = head_tmp;
             head_tmp = head_tmp -> next;
             cur -> next = pre;

@@ -6,13 +6,11 @@
  * };
  */
  
-// 链表反转函数
 struct ListNode* reverseList(struct ListNode* head) {
     if(head == NULL || head -> next == NULL)    // 0 or 1 node
         return head;
     struct ListNode *pre = NULL, *cur = NULL;
-    // reverse iteratively
-    while(head -> next != NULL) {
+    while(head -> next != NULL) {  // reverse iteratively
         cur = head;
         head = head -> next;
         cur -> next = pre;
@@ -27,19 +25,16 @@ void reorderList(struct ListNode* head) {
         return;
     struct ListNode *lhead = head, *rhead = head;
     struct ListNode *lpre = NULL, *rpre = NULL, *cur = head;
-    int temp;
+    int mid;  // the mid position
+    int nodeNums = 0;  // the total numbers of nodes
     
-    // 求出链表总结点数
-    int nodeNums = 0;
-    for(rhead = head; rhead != NULL; rhead = rhead -> next)
+    for(; rhead; rhead = rhead -> next)
         ++nodeNums;
-    
-    if(nodeNums % 2) {  // 链表中有奇数个结点
-        temp = (nodeNums - 1) / 2;
-        while(temp-- > 0)
+    if(nodeNums % 2) {  // odd
+        mid = (nodeNums - 1) / 2;
+        while(mid-- > 0)
             cur = cur -> next;
-        rhead = reverseList(cur);   // 反转链表的后半部分, 并用rhead指向起始结点
-        // 进行结点处理
+        rhead = reverseList(cur);   // reverse the right half
         while(lhead != cur) {
             lpre = lhead;
             lhead = lhead -> next;
@@ -48,12 +43,11 @@ void reorderList(struct ListNode* head) {
             lpre -> next = rpre;
             rpre -> next = lhead;
         }
-    } else {    // 链表中有偶数个结点
-        temp = nodeNums / 2;
-        while(temp-- > 0)
+    } else {    // even
+        mid = nodeNums / 2;
+        while(mid-- > 0)
             cur = cur -> next;
-        rhead = reverseList(cur);   // 反转链表的后半部分, 并用rhead指向起始结点
-        // 进行结点处理
+        rhead = reverseList(cur);   // reverse the right half
         while(lhead -> next != cur) {
             lpre = lhead;
             lhead = lhead -> next;

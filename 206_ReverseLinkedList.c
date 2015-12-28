@@ -8,32 +8,25 @@
  
  /* iterative version */
 struct ListNode* reverseList(struct ListNode* head) {
-    struct ListNode *pre = NULL, *cur = NULL;
-    if(head == NULL || head -> next == NULL)
+    if(head == NULL || head -> next == NULL)    // 0 or 1 node
         return head;
-    
-    // reverse iteratively
-    while(head -> next != NULL)
-    {
+    struct ListNode *pre = NULL, *cur = NULL;
+    while(head -> next != NULL) {  // reverse iteratively
         cur = head;
         head = head -> next;
         cur -> next = pre;
         pre = cur;
     }
-    head -> next = cur;    // reverse completed !
-    
+    head -> next = cur;
     return head;
 }
 
 /* recursive version */
 struct ListNode* reverseList(struct ListNode* head){
-    if(head == NULL || head -> next == NULL)    // base case
+    if(head == NULL || head -> next == NULL)    /* 0 or 1 node */
         return head;
-        
-    // reverse recursively
-    struct ListNode *rhead = reverseList(head -> next);
+    struct ListNode *rhead = reverseList(head -> next);  // reverse recursively
     head -> next -> next = head;
     head -> next = NULL;
-    
     return rhead;
 }

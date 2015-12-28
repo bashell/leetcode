@@ -9,25 +9,23 @@
 class Solution {
 public:
     ListNode* rotateRight(ListNode* head, int k) {
-        if(head == NULL || head -> next == NULL)
+        if(head == nullptr || head -> next == nullptr)
             return head;
-        ListNode *ptr = head, *ptrHead = NULL, *pre = NULL;
         int cnt = 0;
-        while(ptr) {    // 求出链表总结点数
+        ListNode *end = head;
+        for(; end -> next; end = end -> next)
             ++cnt;
-            ptr = ptr -> next;
-        }
-        if(k % cnt == 0)    // k为cnt整数倍时, 链表结构不需要调整
+        ++cnt;
+        if(k % cnt == 0)    // we do nothing when k is multiple of cnt
             return head;
-        ptr = head;
+        ListNode *pre = nullptr, *ptr_head = head;
         for(int i = cnt - k % cnt; i > 0; --i) {
-            pre = head;
-            head = head -> next;
+            pre = ptr_head;
+            ptr_head = ptr_head -> next;
         }
-        pre -> next = NULL;
-        for(ptrHead = head; ptrHead -> next != NULL; ptrHead = ptrHead -> next)
-            ;
-        ptrHead -> next = ptr;
+        pre -> next = nullptr;
+        end -> next = head;
+        head = ptr_head;
         return head;
     }
 };
