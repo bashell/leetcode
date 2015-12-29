@@ -7,10 +7,5 @@ int removeElement(int* nums, int numsSize, int val) {
         else
             i++;
     }
-    
-    // i == j时测试
-    if(nums[i] == val)
-        return i;
-    else
-        return i + 1;
+    return nums[i] == val ? i : i + 1;    
 }
