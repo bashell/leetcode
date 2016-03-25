@@ -20,3 +20,21 @@ public:
                 return i.first;
     }
 };
+
+// Solution3
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int candidate, count = 0;
+        int sz = nums.size();
+        for(int i = 0; i < sz; ++i) {
+            if(count == 0)
+                candidate = nums[i], count = 1;
+            else if(nums[i] == candidate)
+                ++count;
+            else
+                --count;
+        }
+        return candidate;
+    }
+};
