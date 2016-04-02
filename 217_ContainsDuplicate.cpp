@@ -1,3 +1,4 @@
+// Solution1
 class Solution {
 public:
     bool containsDuplicate(vector<int>& nums) {
@@ -9,5 +10,14 @@ public:
             if(e.second >= 2)
                 return true;
         return false;
+    }
+};
+
+// Solution2
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        set<int> iset(nums.cbegin(), nums.cend());
+        return nums.size() != iset.size() ? true : false;
     }
 };
