@@ -1,19 +1,3 @@
-class Solution {
-public:
-    vector<int> grayCode(int n) {
-        vector<int> res{0};
-        for(int i = 0; i < n; ++i) {  // i控制bit位数
-            int cnt = res.size();
-            for(int j = cnt - 1; j >= 0; --j) {  // j用于逆序在最高位前添加1
-                int tmp = res[j];
-                tmp += (1<<i);
-                res.push_back(tmp);
-            }
-        }
-        return res;
-    }
-};
-
 /*
 DP策略，tabulation(Bottom Up)
 
@@ -39,3 +23,19 @@ DP策略，tabulation(Bottom Up)
  1 0 0
  
 */
+
+class Solution {
+public:
+    vector<int> grayCode(int n) {
+        if(n == 0) return vector<int>{0};
+        if(n == 1) return vector<int>{0, 1};
+        vector<int> res{0, 1};
+        for(int i = 1; i < n; ++i) {
+            vector<int> tmp(res.cbegin(), res.cend());
+            for(auto &t : tmp)
+                t += (1 << i);
+            res.insert(res.end(), tmp.crbegin(), tmp.crend());
+        }
+        return res;
+    }
+};
