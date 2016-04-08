@@ -4,10 +4,10 @@ public:
     // Note: f(n-1)再爬1 step即可,f(n-2)再爬2 steps即可.
     // Fibonacci: f(1) = f(2) = 1
     int climbStairs(int n) {
-        if(n <= 2)
+        if(n <= 2)  // i = 0, 1
             return n;
         int a = 1, b = 1, c;
-        for(int i = 2; i < n; ++i) {
+        for(int i = 2; i <= n; ++i) {  // i = 2, 3, ..., n
             c = a + b;
             a = b;
             b = c;
