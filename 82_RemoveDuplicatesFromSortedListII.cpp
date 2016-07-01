@@ -6,6 +6,8 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
+// Solution1: T(n) = O(n), S(n) = O(n)
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
@@ -30,6 +32,33 @@ public:
                 cur = cur -> next;
             }
         }
+        return head;
+    }
+};
+
+// Solution2: T(n) = O(n), S(n) = O(1)
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(head == NULL || head->next == NULL) return head;
+        ListNode *dummy = new ListNode(head->val - 1);
+        dummy->next = head;
+        ListNode *pre = dummy, *cur = head;
+        int count;
+        while(cur) {
+            int val = cur->val;
+            count = 0;
+            while(cur && cur->val == val) {
+                cur = cur->next;
+                ++count;
+            }
+            if(count > 1) 
+                pre->next = cur;  // 出现多次, 待下轮检查
+            else 
+                pre = pre->next;  // 仅出现一次, pre前进一步
+        }
+        head = dummy->next;
+        delete dummy;
         return head;
     }
 };
